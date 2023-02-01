@@ -19,12 +19,7 @@ LOCAL_PATH:= $(call my-dir)
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
 ifneq ($(strip $(TARGET_SUPPORT_ADF_DISPLAY)),true)
 
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),sc8830)
 DEVICE_WITH_GSP := true
-endif
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
-DEVICE_WITH_GSP := true
-endif
 
 ifeq ($(strip $(DEVICE_WITH_GSP)),true)
 include $(CLEAR_VARS)
@@ -34,6 +29,7 @@ LOCAL_MODULE_RELATIVE_PATH := hw
 
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_SRC_FILES := gsp_hal.cpp
+LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video
 
 LOCAL_CFLAGS:= -DLOG_TAG=\"GSPHAL\"
 
@@ -41,7 +37,10 @@ LOCAL_CFLAGS:= -DLOG_TAG=\"GSPHAL\"
 MALI_DDK_PATH := device/sprd/common/libs
 LOCAL_C_INCLUDES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video
 LOCAL_C_INCLUDES += \
-	$(TOP)/hardware/sprd/libgpu/include \
+	$(TOP)/hardware/sprd/gpu/mali/include
+	
+	#$(TOP)/hardware/sprd/gralloc/scx30g_v2
+
 
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)

@@ -37,6 +37,7 @@
 #include <cutils/log.h>
 
 #include "gralloc_priv.h"
+#include "gralloc_ext_sprd.h"
 
 
 namespace android {

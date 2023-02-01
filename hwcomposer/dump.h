@@ -13,6 +13,7 @@
 #include <hardware/hwcomposer.h>
 #include <hardware/hardware.h>
 #include "gralloc_priv.h"
+#include "gralloc_ext_sprd.h"
 #include "sprd_fb.h"
 
 #define BI_RGB          0

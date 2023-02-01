@@ -53,8 +53,6 @@ static const struct {
     { "OMX.sprd.soft.h263.decoder", "sprd_soft_mpeg4dec", "video_decoder.h263" },
     { "OMX.sprd.soft.mpeg4.decoder", "sprd_soft_mpeg4dec", "video_decoder.mpeg4" },
 
-    { "OMX.google.mjpg.decoder", "soft_mjpgdec", "video_decoder.mjpg" },
-    { "OMX.google.imaadpcm.decoder", "soft_imaadpcmdec", "audio_decoder.imaadpcm" },
 };
 
 static const size_t kNumComponents =

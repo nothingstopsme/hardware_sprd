@@ -12,17 +12,19 @@ LOCAL_C_INCLUDES:= \
 	$(TOP)/frameworks/native/include/media/hardware \
 	$(TOP)/hardware/sprd/libstagefrighthw/include	\
 	$(TOP)/hardware/sprd/libstagefrighthw/include/openmax	\
-	$(TOP)/hardware/sprd/libmemion
+	$(TOP)/hardware/sprd/libmemoryheapion
 
 LOCAL_C_INCLUDES += $(GPU_GRALLOC_INCLUDES)
 
 LOCAL_SHARED_LIBRARIES :=       \
-        libmemion        \
+        libmemoryheapion        \
         libutils                \
         libcutils               \
         libui                   \
-        libdl			\
-	libstagefright_foundation
+        libdl \
+				liblog \
+				libstagefright_foundation
+
 LOCAL_MODULE := libstagefrighthw
 
 LOCAL_CFLAGS:= -DLOG_TAG=\"$(TARGET_BOARD_PLATFORM).libstagefright\"

@@ -56,6 +56,7 @@
 
 #include "sprd_fb.h"
 #include "gralloc_priv.h"
+#include "gralloc_ext_sprd.h"
 #include "dump.h"
 
 using namespace android;

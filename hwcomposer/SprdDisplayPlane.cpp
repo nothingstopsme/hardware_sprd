@@ -102,8 +102,7 @@ private_handle_t* SprdDisplayPlane:: createPlaneBuffer(int index)
         ALOGE("plane buffer index < 0");
         return NULL;
     }
-
-    GraphicBufferAllocator::get().allocate(mWidth, mHeight, mFormat, mPlaneUsage, (buffer_handle_t*)&BufHandle, &stride, getUniqueId(), std::move("HWC"));
+		GraphicBufferAllocator::get().allocate(mWidth, mHeight, mFormat, mPlaneUsage, (buffer_handle_t*)&BufHandle, &stride, getUniqueId(), std::move("HWC"));
     if (BufHandle == NULL)
     {
         ALOGE("SprdDisplayPlane cannot alloc buffer");
@@ -357,7 +356,14 @@ private_handle_t* SprdDisplayPlane::getPlaneBuffer()
 
 void SprdDisplayPlane::getPlaneGeometry(unsigned int *width, unsigned int *height, int *format)
 {
-
+		if (width == NULL || height == NULL || format == NULL)
+    {
+        ALOGE("%s: input parameters are NULL", __func__);
+        return;
+    }
+		*width = mWidth;
+    *height = mHeight;
+    *format = mFormat;
 }
 
 enum PlaneRunStatus SprdDisplayPlane:: queryPlaneRunStatus()

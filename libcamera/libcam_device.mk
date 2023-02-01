@@ -1,2 +1,0 @@
-SPRD_LIB := libcamoem
-PRODUCT_PACKAGES += $(SPRD_LIB)

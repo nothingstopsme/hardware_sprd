@@ -23,7 +23,7 @@ ifeq ($(strip $(USE_SPRD_HWCOMPOSER)),true)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SHARED_LIBRARIES := liblog libEGL libmemion libutils libcutils libGLESv1_CM libGLESv2 libhardware libui libsync \
+LOCAL_SHARED_LIBRARIES := liblog libEGL libmemoryheapion libutils libcutils libGLESv1_CM libGLESv2 libhardware libui libsync \
 	libHWCUtils \
 
 LOCAL_SRC_FILES := SprdHWComposer.cpp \
@@ -44,15 +44,17 @@ LOCAL_SRC_FILES := SprdHWComposer.cpp \
 		   SprdUtil.cpp \
                    dump.cpp
 LOCAL_C_INCLUDES := \
-	$(TOP)/hardware/sprd/libmemion \
+	$(TOP)/hardware/sprd/libmemoryheapion \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
 
 LOCAL_ADDITIONAL_DEPENDENCIES += \
-	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
+	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include/video
 
 LOCAL_C_INCLUDES += \
-	$(TOP)/hardware/sprd/libgpu/include \
-	$(TOP)/hardware/sprd/libmemion \
+	$(TOP)/hardware/sprd/gpu/mali/include
+
 
 LOCAL_MODULE := hwcomposer.$(TARGET_BOARD_PLATFORM)
 LOCAL_CFLAGS:= -DLOG_TAG=\"SPRDHWComposer\"
@@ -70,12 +72,15 @@ DEVICE_WITH_GSP := true
 DEVICE_OVERLAYPLANE_BORROW_PRIMARYPLANE_BUFFER := true
 DEVICE_USE_FB_HW_VSYNC := true
 DEVICE_DIRECT_DISPLAY_SINGLE_OSD_LAYER := true
+#LOCAL_C_INCLUDES += $(LOCAL_PATH)/../gralloc/scx30g_v2
+#LOCAL_C_INCLUDES += $(LOCAL_PATH)/../gralloc/sc8830
 endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),scx15)
 DEVICE_WITH_GSP := true
 DEVICE_OVERLAYPLANE_BORROW_PRIMARYPLANE_BUFFER := true
 #DEVICE_PRIMARYPLANE_USE_RGB565 := true
 #DEVICE_DYNAMIC_RELEASE_PLANEBUFFER := true
+#LOCAL_C_INCLUDES += $(LOCAL_PATH)/../gralloc/scx15
 endif
 
 ifeq ($(strip $(DEVICE_USE_FB_HW_VSYNC)),true)
@@ -85,7 +90,7 @@ endif
 #SPRD_HWC_DEBUG_TRACE := false
 
 ifeq ($(strip $(DEVICE_WITH_GSP)),true)
-	LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc
+	#LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libcamera/sc8830/inc
 	#LOCAL_CFLAGS += -DVIDEO_LAYER_USE_RGB
 	# PROCESS_VIDEO_USE_GSP : protecting sc8830 code
 	LOCAL_CFLAGS += -DPROCESS_VIDEO_USE_GSP

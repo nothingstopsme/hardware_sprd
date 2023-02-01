@@ -46,6 +46,7 @@
 #include <cutils/atomic.h>
 #include <cutils/log.h>
 #include "gralloc_priv.h"
+#include "gralloc_ext_sprd.h"
 
 #include "SprdPrimaryDisplayDevice/SprdFrameBufferHAL.h"
 
